@@ -1,3 +1,6 @@
+"
+I'm an abstraction for a country in the context of drawing a map from an SVG file with all countries.
+"
 Class {
 	#name : #MyCountry,
 	#superclass : #Object,
