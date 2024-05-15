@@ -3,26 +3,26 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'title',
-		'name',
 		'date',
 		'table',
 		'ok',
 		'cancel',
-		'countries'
+		'countries',
+		'countryNameDropList'
 	],
 	#category : #SummerSchool
 }
 
 { #category : #'as yet unclassified' }
 FlagPresenter >> connectPresenters [ 
-"  ok action: [ self onOK ].
+  ok action: [ self onOK ].
   cancel action: [ self onCancel ].
   
   title whenSelectedItemChangedDo: [ :item |
     self onTitleChanged: item ].
   
-  name whenSelectedItemChangedDo: [ :item |
-    self onNameChanged: item ]."
+  countryNameDropList whenSelectedItemChangedDo: [ :item |
+    self onNameChanged: item ].
 ]
 
 { #category : #'as yet unclassified' }
@@ -48,12 +48,14 @@ FlagPresenter >> defaultLayout [
 FlagPresenter >> initialize [
 	super initialize.
 	self loadCountries.
+
 ]
 
 { #category : #'as yet unclassified' }
-FlagPresenter >> intializePresenters [
+FlagPresenter >> initializePresenters [
+	super intializePresenters.
 	title := self newDropList.
-	name := self newDropList.
+	countryNameDropList := self newDropList.
 	date := self newText.
 	table := self newTable.
 	ok := self newButton
@@ -68,6 +70,7 @@ FlagPresenter >> intializePresenters [
 FlagPresenter >> loadCountries [
 	countries := ((XMLDOMParser parse: 'world.svg' asFileReference) allElementsNamed: 'path')
 		collect: [ :path | MyCountry new fromXML: path ] as: OrderedCollection.
+	countryNameDropList display: [ :item | item name ].
 ]
 
 { #category : #'as yet unclassified' }
