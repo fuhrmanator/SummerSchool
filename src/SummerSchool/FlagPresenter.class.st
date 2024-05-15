@@ -15,14 +15,14 @@ Class {
 
 { #category : #'as yet unclassified' }
 FlagPresenter >> connectPresenters [ 
-  ok action: [ self onOK ].
+"  ok action: [ self onOK ].
   cancel action: [ self onCancel ].
   
   title whenSelectedItemChangedDo: [ :item |
     self onTitleChanged: item ].
   
   name whenSelectedItemChangedDo: [ :item |
-    self onNameChanged: item ].
+    self onNameChanged: item ]."
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,7 +67,7 @@ FlagPresenter >> intializePresenters [
 { #category : #'as yet unclassified' }
 FlagPresenter >> loadCountries [
 	countries := ((XMLDOMParser parse: 'world.svg' asFileReference) allElementsNamed: 'path')
-		collect: [ :path | MyCountry new fromXML: path ].
+		collect: [ :path | MyCountry new fromXML: path ] as: OrderedCollection.
 ]
 
 { #category : #'as yet unclassified' }
